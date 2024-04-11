@@ -1,0 +1,83 @@
+# Hyperparameters
+LEARNING_RATE = 2e-5  # 1.5e-5, 2e-5, 3e-5, 5e-5
+BATCH_SIZE = 16  # 8, 16, 32
+WARMUP_STEPS = 100  # 0, 100, 1000, 10000
+NUM_EPOCHS = 5  # 3, 5, 10
+WEIGHT_DECAY = 1e-3  # 1e-2 or 1e-3
+DROP_OUT_RATE = 0.1  # 0.1 or 0.2
+
+OUTPUT
+===========
+2023-12-19 19:08:52.744768: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2023-12-19 19:08:52.744825: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2023-12-19 19:08:52.746243: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2023-12-19 19:08:53.868674: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+
+Using device: CUDA
+
+Loading data from /content/sample_data/shared_data/dataset_2_2_pair_sentences_13b.jsonl...
+Loaded 7043 items.
+
+Class distribution:
+- continue: 3548
+- not_continue: 3495
+continue (after trim) : 1774
+model.safetensors: 100% 440M/440M [00:03<00:00, 129MB/s]
+Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertForSequenceClassification: ['cls.predictions.bias', 'cls.seq_relationship.bias', 'cls.predictions.transform.dense.weight', 'cls.seq_relationship.weight', 'cls.predictions.transform.dense.bias', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.LayerNorm.weight']
+- This IS expected if you are initializing BertForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BertForSequenceClassification were not initialized from the model checkpoint at bert-base-uncased and are newly initialized: ['classifier.bias', 'classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+
+Training Epoch 1/5: 100% 264/264 [01:01<00:00,  4.30it/s]
+Validating: 100% 33/33 [00:05<00:00,  6.35it/s]
+* Training Loss: 0.6863, Validation Loss: 0.6099
+
+Training Epoch 2/5: 100% 264/264 [01:01<00:00,  4.27it/s]
+Validating: 100% 33/33 [00:05<00:00,  6.05it/s]
+* Training Loss: 0.6209, Validation Loss: 0.6130
+
+Training Epoch 3/5: 100% 264/264 [01:03<00:00,  4.19it/s]
+Validating: 100% 33/33 [00:05<00:00,  5.77it/s]
+* Training Loss: 0.4874, Validation Loss: 0.6327
+
+Training Epoch 4/5: 100% 264/264 [01:03<00:00,  4.13it/s]
+Validating: 100% 33/33 [00:05<00:00,  5.76it/s]
+* Training Loss: 0.3030, Validation Loss: 0.8089
+
+Training Epoch 5/5: 100% 264/264 [01:04<00:00,  4.11it/s]
+Validating: 100% 33/33 [00:05<00:00,  5.62it/s]
+* Training Loss: 0.1724, Validation Loss: 0.9540
+
+Accuracy: 0.6622390891840607
+Training Class-wise metrics:
+continue: Precision = 0.50, Recall = 0.63, F1 = 0.56
+not_continue: Precision = 0.78, Recall = 0.68, F1 = 0.73
+Testing: 100% 33/33 [00:06<00:00,  5.35it/s]
+Average test loss: 1.1413449175430066
+
+Model: BERT
+
+- Accuracy: 0.620
+- Precision: 0.610
+- Recall: 0.623
+- F1 Score: 0.605
+- AUC-ROC: 0.649
+- Matthews Correlation Coefficient (MCC): 0.233
+- Confusion Matrix:
+              continue  not_continue
+continue           112            66
+not_continue       134           215
+
+continue: Precision = 0.50, Recall = 0.63, F1 = 0.56
+not_continue: Precision = 0.78, Recall = 0.68, F1 = 0.73
+
+Hyperparameters:
+- Learning Rate: 2e-05
+- Batch Size: 16
+- Warmup Steps: 100
+- Number of Epochs: 5
+- Weight Decay: 0.001
+- Dropout Rate: 0.1
+---
+- Seed: 42

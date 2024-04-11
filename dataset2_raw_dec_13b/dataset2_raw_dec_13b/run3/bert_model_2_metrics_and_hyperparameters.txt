@@ -1,0 +1,90 @@
+LEARNING_RATE = 5e-5  # 1.5e-5, 2e-5, 3e-5, 5e-5
+BATCH_SIZE = 32  # 8, 16, 32
+WARMUP_STEPS = 1000  # 0, 100, 1000, 10000
+NUM_EPOCHS = 7  # 3, 5, 10
+WEIGHT_DECAY = 1e-2  # 1e-2 or 1e-3
+DROP_OUT_RATE = 0.2  # 0.1 or 0.2
+
+OUTPUT
+==============
+
+2023-12-19 19:38:13.261783: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2023-12-19 19:38:13.261837: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2023-12-19 19:38:13.263173: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2023-12-19 19:38:14.450270: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+
+Using device: CUDA
+
+Loading data from /content/sample_data/shared_data/dataset_2_2_pair_sentences_13b.jsonl...
+Loaded 7043 items.
+
+Class distribution:
+- continue: 3548
+- not_continue: 3495
+continue (after trim) : 1774
+Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertForSequenceClassification: ['cls.predictions.transform.LayerNorm.bias', 'cls.seq_relationship.bias', 'cls.predictions.transform.dense.bias', 'cls.predictions.transform.dense.weight', 'cls.predictions.bias', 'cls.seq_relationship.weight', 'cls.predictions.transform.LayerNorm.weight']
+- This IS expected if you are initializing BertForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BertForSequenceClassification were not initialized from the model checkpoint at bert-base-uncased and are newly initialized: ['classifier.bias', 'classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+
+Training Epoch 1/7: 100% 132/132 [00:52<00:00,  2.50it/s]
+Validating: 100% 17/17 [00:05<00:00,  3.34it/s]
+* Training Loss: 0.7097, Validation Loss: 0.6992
+
+Training Epoch 2/7: 100% 132/132 [00:53<00:00,  2.47it/s]
+Validating: 100% 17/17 [00:05<00:00,  3.19it/s]
+* Training Loss: 0.6900, Validation Loss: 0.6960
+
+Training Epoch 3/7: 100% 132/132 [00:54<00:00,  2.41it/s]
+Validating: 100% 17/17 [00:05<00:00,  3.05it/s]
+* Training Loss: 0.6656, Validation Loss: 0.6308
+
+Training Epoch 4/7: 100% 132/132 [00:55<00:00,  2.37it/s]
+Validating: 100% 17/17 [00:05<00:00,  3.01it/s]
+* Training Loss: 0.6128, Validation Loss: 0.6801
+
+Training Epoch 5/7: 100% 132/132 [00:56<00:00,  2.36it/s]
+Validating: 100% 17/17 [00:05<00:00,  2.96it/s]
+* Training Loss: 0.5531, Validation Loss: 0.7101
+
+Training Epoch 6/7: 100% 132/132 [00:56<00:00,  2.35it/s]
+Validating: 100% 17/17 [00:05<00:00,  2.92it/s]
+* Training Loss: 0.4345, Validation Loss: 0.8072
+
+Training Epoch 7/7: 100% 132/132 [00:56<00:00,  2.35it/s]
+Validating: 100% 17/17 [00:05<00:00,  2.92it/s]
+* Training Loss: 0.3156, Validation Loss: 0.9141
+
+Accuracy: 0.593656817565736
+Training Class-wise metrics:
+continue: Precision = 0.43, Recall = 0.64, F1 = 0.51
+not_continue: Precision = 0.76, Recall = 0.57, F1 = 0.65
+Testing: 100% 17/17 [00:05<00:00,  3.33it/s]
+Average test loss: 0.8857764987384572
+
+Model: BERT
+
+- Accuracy: 0.658
+- Precision: 0.618
+- Recall: 0.617
+- F1 Score: 0.617
+- AUC-ROC: 0.677
+- Matthews Correlation Coefficient (MCC): 0.234
+- Confusion Matrix:
+              continue  not_continue
+continue            87            91
+not_continue        89           260
+
+continue: Precision = 0.43, Recall = 0.64, F1 = 0.51
+not_continue: Precision = 0.76, Recall = 0.57, F1 = 0.65
+
+Hyperparameters:
+- Learning Rate: 5e-05
+- Batch Size: 32
+- Warmup Steps: 1000
+- Number of Epochs: 7
+- Weight Decay: 0.01
+- Dropout Rate: 0.2
+---
+- Seed: 42
